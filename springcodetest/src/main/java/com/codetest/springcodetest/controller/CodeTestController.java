@@ -12,31 +12,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codetest.springcodetest.domain.ConfigCreateRequest;
 import com.codetest.springcodetest.domain.ConfigCreateResponse;
-
+import com.codetest.springcodetest.service.ConfigService;
+import com.codetest.springcodetest.utils.CodeTestUtils;
 
 @RestController
 @RequestMapping("/api")
 public class CodeTestController {
-	
-	//@Autowired
-	//ConfigRepository configService;
+
+	@Autowired
+	ConfigService configService;
 
 	@RequestMapping(value = "/config/{id}", method = RequestMethod.GET)
-	public String getConfig(){
+	public String getConfig() {
 		return "hey";
-		
-		//return Arrays.asList(new Config("GetUsers", 12));
+
+		// return Arrays.asList(new Config("GetUsers", 12));
 	}
-	
-    @PostMapping("/{appCode}/config/{version}")
-    @ResponseBody
-    public ResponseEntity<ConfigCreateResponse> createConfig(@PathVariable(value = "appCode") String appCode,@PathVariable(value = "version") String version,@RequestBody ConfigCreateRequest csr) {
-    	ConfigCreateResponse configCreateResponse = new ConfigCreateResponse("Success");
-         String env = csr.getEnv();
-         
-    	return ResponseEntity.ok().body(configCreateResponse);
-        
-        
-    }
-	
+
+	/**
+	 * @param appCode
+	 * @param version
+	 * @param csr
+	 * @return ConfigCreateResponse
+	 */
+	@PostMapping("/{appCode}/config/{version}")
+	@ResponseBody
+	public ResponseEntity<ConfigCreateResponse> createConfig(@PathVariable(value = "appCode") String appCode,
+			@PathVariable(value = "version") String version, @RequestBody ConfigCreateRequest csr) {
+		ConfigCreateResponse configCreateResponse = null;
+		configCreateResponse = configService.createConfig(CodeTestUtils.buildConfigEntity(appCode, version, csr));
+		return ResponseEntity.ok().body(configCreateResponse);
+	}
+
 }
