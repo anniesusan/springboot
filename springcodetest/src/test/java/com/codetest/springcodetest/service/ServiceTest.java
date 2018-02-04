@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.codetest.springcodetest.domain.GetConfigResponse;
+import com.codetest.springcodetest.exception.SpringCodeTestException;
 import com.codetest.springcodetest.model.Config;
 import com.codetest.springcodetest.repository.ConfigRepository;
 import com.codetest.springcodetest.utils.CodeTestUtils;
@@ -19,32 +20,37 @@ import com.codetest.springcodetest.utils.CodeTestUtils;
 public class ServiceTest {
 
 	@Mock
-    private static ConfigRepository configRepository ;
+	private static ConfigRepository configRepository;
 
 	@InjectMocks
-	private static ConfigService configService=new ConfigService();
-	
+	private static ConfigService configService = new ConfigService();
+
 	private Config config;
-	
+
 	@Test
-    public void testFindAccount() {
-		
+	public void testFindAccount() {
+
 		Long accountId = 1001L;
 		config = new Config();
 		config.setId(accountId);
 		config.setAppCode("22");
 		config.setVersion("abc");
 		config.setConfigcreate("{\"env\":\"hello\",\"endPoint\":\"eugin\",\"port\":\"eugin\"}");
-		config.setCreatedAt(new Date(2018-02-02));
-		config.setUpdatedAt(new Date(2018-02-02));
-        
-		 Mockito.when(configRepository.findByAppCodeAndVersion("333", "555")).thenReturn(config);
-         
-	        GetConfigResponse retrivedConfig = configService.getConfig("333", "555");
-	        
-	        GetConfigResponse configObj = CodeTestUtils.JsonToObject(config.getConfigcreate());
+		config.setCreatedAt(new Date(2018 - 02 - 02));
+		config.setUpdatedAt(new Date(2018 - 02 - 02));
 
-	        Assert.assertEquals(configObj.getEnv(), retrivedConfig.getEnv());
+		GetConfigResponse retrivedConfig = null;
+		try {
+			Mockito.when(configRepository.findByAppCodeAndVersion("333", "555")).thenReturn(config);
+			retrivedConfig = configService.getConfig("333", "555");
+		} catch (SpringCodeTestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-    }
+		GetConfigResponse configObj = CodeTestUtils.JsonToObject(config.getConfigcreate());
+
+		Assert.assertEquals(configObj.getEnv(), retrivedConfig.getEnv());
+
+	}
 }

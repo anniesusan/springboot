@@ -1,5 +1,7 @@
 package com.codetest.springcodetest.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import com.codetest.springcodetest.domain.ConfigCreateRequest;
 import com.codetest.springcodetest.domain.ConfigCreateResponse;
 import com.codetest.springcodetest.domain.GetConfigResponse;
 import com.codetest.springcodetest.domain.GetVersionListResponse;
+import com.codetest.springcodetest.exception.SpringCodeTestException;
 import com.codetest.springcodetest.service.ConfigService;
 import com.codetest.springcodetest.utils.CodeTestUtils;
 
@@ -23,7 +26,9 @@ import com.codetest.springcodetest.utils.CodeTestUtils;
  */
 @RestController
 @RequestMapping("/api")
-public class CodeTestController {
+public class CodeTestController extends BaseController {
+	
+	private final static transient Logger logger = LoggerFactory.getLogger(CodeTestController.class);
 
 	@Autowired
 	ConfigService configService;
@@ -37,8 +42,10 @@ public class CodeTestController {
 	 */
 	@GetMapping("/{appCode}/config/{version}")
 	public ResponseEntity<GetConfigResponse> getConfig(@PathVariable(value = "appCode") String appCode,
-			@PathVariable(value = "version") String version) {
+			@PathVariable(value = "version") String version) throws SpringCodeTestException {
+		logger.info("getConfig start()");
 		GetConfigResponse getConfigResponse = configService.getConfig(appCode, version);
+		logger.info("getConfig end()");
 		return ResponseEntity.ok().body(getConfigResponse);
 
 	}
@@ -55,7 +62,7 @@ public class CodeTestController {
 	@PostMapping("/{appCode}/config/{version}")
 	@ResponseBody
 	public ResponseEntity<ConfigCreateResponse> createConfig(@PathVariable(value = "appCode") String appCode,
-			@PathVariable(value = "version") String version, @RequestBody ConfigCreateRequest csr) {
+			@PathVariable(value = "version") String version, @RequestBody ConfigCreateRequest csr) throws SpringCodeTestException {
 		ConfigCreateResponse configCreateResponse = configService
 				.createConfig(CodeTestUtils.buildConfigEntity(appCode, version, csr));
 		return ResponseEntity.ok().body(configCreateResponse);
@@ -69,7 +76,7 @@ public class CodeTestController {
 	 * @return GetVersionListResponse
 	 */
 	@GetMapping("/{appCode}/config")
-	public ResponseEntity<GetVersionListResponse> getVersionList(@PathVariable(value = "appCode") String appCode) {
+	public ResponseEntity<GetVersionListResponse> getVersionList(@PathVariable(value = "appCode") String appCode) throws SpringCodeTestException{
 		GetVersionListResponse getVersionListResponse = configService.getVersionList(appCode);
 		return ResponseEntity.ok().body(getVersionListResponse);
 

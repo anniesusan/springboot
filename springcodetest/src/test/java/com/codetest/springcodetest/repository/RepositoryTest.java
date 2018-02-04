@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.codetest.springcodetest.exception.SpringCodeTestException;
 import com.codetest.springcodetest.model.Config;
 
 @RunWith(SpringRunner.class)
@@ -34,7 +35,13 @@ public class RepositoryTest {
     @Test
     public void saveConfigTest() { 
     	configRepository.save(config);
-    	Config retrivedConfig = configRepository.findByAppCodeAndVersion("33", "44"); 
+    	Config retrivedConfig = null;
+		try {
+			retrivedConfig = configRepository.findByAppCodeAndVersion("33", "44");
+		} catch (SpringCodeTestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
          Assert.assertEquals(retrivedConfig.getVersion(), retrivedConfig.getVersion());
     }
  
