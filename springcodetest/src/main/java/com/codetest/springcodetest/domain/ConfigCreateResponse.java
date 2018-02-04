@@ -6,7 +6,7 @@ package com.codetest.springcodetest.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * @author anniesusan
+ * @author ANNIE
  *
  */
 @JsonIgnoreProperties(ignoreUnknown =true)

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.codetest.springcodetest.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -10,17 +7,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  */
 @JsonIgnoreProperties(ignoreUnknown =true)
-public class ConfigCreateRequest {
+public class GetConfigResponse {
 	
 	private String env;
 	private String endPoint;
 	private String port;
 	
-	public ConfigCreateRequest(){
+	public GetConfigResponse(){
 		
 	}
 	
-	public ConfigCreateRequest(String env, String endPoint, String port) {
+	public GetConfigResponse(String env, String endPoint, String port) {
 		super();
 		this.env = env;
 		this.endPoint = endPoint;
@@ -51,8 +48,4 @@ public class ConfigCreateRequest {
 		this.port = port;
 	}
 	
-	
-	
-	
-
 }
