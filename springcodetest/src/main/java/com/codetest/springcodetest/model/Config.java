@@ -51,6 +51,19 @@ public class Config {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
+    
+	public Config() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Config(String appCode, String version, String configcreate, Date createdAt,
+			Date updatedAt) {
+		this.appCode = appCode;
+		this.version = version;
+		this.configcreate = configcreate;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
 
 	public Long getId() {
 		return id;
