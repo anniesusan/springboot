@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.codetest.springcodetest.domain.ConfigCreateResponse;
 import com.codetest.springcodetest.domain.GetConfigResponse;
 import com.codetest.springcodetest.exception.SpringCodeTestException;
 import com.codetest.springcodetest.model.Config;
@@ -28,7 +29,7 @@ public class ServiceTest {
 	private Config config;
 
 	@Test
-	public void testFindAccount() {
+	public void GetConfig() {
 
 		Long accountId = 1001L;
 		config = new Config();
@@ -53,4 +54,29 @@ public class ServiceTest {
 		Assert.assertEquals(configObj.getEnv(), retrivedConfig.getEnv());
 
 	}
+	@Test
+	public void CreateConfig() {
+
+		Long accountId = 1001L;
+		config = new Config();
+		config.setId(accountId);
+		config.setAppCode("22");
+		config.setVersion("abc");
+		config.setConfigcreate("{\"env\":\"hello\",\"endPoint\":\"eugin\",\"port\":\"eugin\"}");
+		config.setCreatedAt(new Date(2018 - 02 - 02));
+		config.setUpdatedAt(new Date(2018 - 02 - 02));
+
+		ConfigCreateResponse csr = null;
+		try {
+			Mockito.when(configRepository.save(config)).thenReturn(config);
+			csr = configService.createConfig(config);
+			csr.getResponseStatus();
+			Assert.assertEquals(csr.getResponseStatus(),"SUCCESS");
+		} catch (SpringCodeTestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 }
