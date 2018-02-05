@@ -18,6 +18,10 @@ Task #2 - Creating unit tests for task #1 (controller, service and repository la
 ### Configuration
 
 The data base used here is MYSQL. The connection properties are available in application.properties file
+Please make sure that you have the Db server set up properly and the connections defined in the application.properties file.
+A screenhot of my application.properties is shown below.
+
+![serverproperties](https://user-images.githubusercontent.com/34004394/35787115-cf1bd598-09f9-11e8-9a54-3d7548dc4713.JPG)
 
 ### Libraries Used
 
