@@ -24,7 +24,7 @@ public class ServiceTest {
 	private static ConfigRepository configRepository;
 
 	@InjectMocks
-	private static ConfigService configService = new ConfigService();
+	private static ConfigService configService = new ConfigServiceImpl();
 
 	private Config config;
 

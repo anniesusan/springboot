@@ -1,4 +1,5 @@
 package com.codetest.springcodetest.model;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,53 +12,50 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
-
 import org.hibernate.validator.constraints.NotBlank;
+
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
-@Entity
-@Table(name = "config", uniqueConstraints= @UniqueConstraint(columnNames = {"appCode", "version"}))
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
-        allowGetters = true)
+@Entity
+@Table(name = "config", uniqueConstraints = @UniqueConstraint(columnNames = { "app_code", "version" }))
+@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
 public class Config {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @SuppressWarnings("deprecation")
-    @NotBlank
-    private String appCode;
+	@Column(name = "app_code")
+	@NotBlank
+	private String appCode;
 
-    @NotBlank
-    @Column(unique=true)
-    private String version;
-    
-    
-    private String configcreate;
+	@Column
+	@NotBlank
+	private String version;
 
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createdAt;
+	private String configcreate;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date updatedAt;
-    
+	@Column(nullable = false, updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreatedDate
+	private Date createdAt;
+
+	@Column(nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@LastModifiedDate
+	private Date updatedAt;
+
 	public Config() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Config(String appCode, String version, String configcreate, Date createdAt,
-			Date updatedAt) {
+	public Config(String appCode, String version, String configcreate, Date createdAt, Date updatedAt) {
 		this.appCode = appCode;
 		this.version = version;
 		this.configcreate = configcreate;
@@ -112,7 +110,5 @@ public class Config {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
-    
 
 }

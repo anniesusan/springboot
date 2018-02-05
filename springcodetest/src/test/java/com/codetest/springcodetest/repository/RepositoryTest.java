@@ -42,7 +42,7 @@ public class RepositoryTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-         Assert.assertEquals(retrivedConfig.getVersion(), retrivedConfig.getVersion());
+         Assert.assertEquals(config.getVersion(), retrivedConfig.getVersion());
     }
  
 }
