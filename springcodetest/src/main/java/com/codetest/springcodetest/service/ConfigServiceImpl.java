@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.codetest.springcodetest.domain.ConfigCreateResponse;
 import com.codetest.springcodetest.domain.GetConfigResponse;
 import com.codetest.springcodetest.domain.GetVersionListResponse;
@@ -87,7 +85,6 @@ public class ConfigServiceImpl implements ConfigService {
 	 * @return ConfigCreateResponse
 	 * @throws SpringCodeTestException
 	 */
-	@Transactional
 	@Override
 	public ConfigCreateResponse createConfig(Config config) throws SpringCodeTestException {
 		logger.info("createConfig start()");
