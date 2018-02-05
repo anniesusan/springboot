@@ -1,7 +1,7 @@
-# spring code exercise
+# spring Boot Coding Test
 
 Task #1
-Creating a Config Service REST api using Spring Boot that implements below apis to return and update JSON documents representing an application’s config properties. 
+* Creating a Config Service REST api using Spring Boot that implements below apis to return and update JSON documents representing an application’s config properties. 
 The application needs to store the JSON documents in any SQL database using Spring Data JPA.
 
 * GET /api/{appCode}/config/{version} – return JSON document for specified appCode and version
