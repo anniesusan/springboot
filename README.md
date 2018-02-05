@@ -18,16 +18,29 @@ Task #2 - Creating unit tests for task #1 (controller, service and repository la
 ### Configuration
 
 The data base used here is MYSQL. The connection properties are available in application.properties file
+Please make sure that you have the Db server set up properly and the connections defined in the application.properties file.
+A screenhot of my application.properties is shown below.
+
+![serverproperties](https://user-images.githubusercontent.com/34004394/35787115-cf1bd598-09f9-11e8-9a54-3d7548dc4713.JPG)
 
 ### Libraries Used
 
 * SwaggerUI - for api documentation
 * Mockito, JUnit - for unit testing
 * SLF4J - for logging
+* Spring Exception handly capabiliesis used in BaseController.java to catch the exception and throw error messages in a generic format.
+  
+  Example:
+  {
+  "errorCode": 500,
+  "errorMessage": "ERROR_CREATING_CONFIG"
+  }
 
 Once you start the spring boot application in your local machine , the swagger UI  can be accessed at the below url:
 
 http://localhost:9098/swagger-ui.html#/code45test45controller
+
+![swaggerui](https://user-images.githubusercontent.com/34004394/35787171-402c3214-09fa-11e8-8978-5561af2c7a09.JPG)
 
 
 ## Author

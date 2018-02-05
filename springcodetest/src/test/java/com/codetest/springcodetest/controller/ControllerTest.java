@@ -51,7 +51,7 @@ public class ControllerTest extends ApplicationTests {
 				.post("http://localhost:9098/api/testAppCode/config/testVersion").accept(MediaType.APPLICATION_JSON)
 				.content(example).contentType(MediaType.APPLICATION_JSON);
 
-		mockMvc.perform(post("http://localhost:9098/api/abc/config/12345").contentType("application/json;charset=UTF-8")
+		mockMvc.perform(post("http://localhost:9098/api/testAppCode/config/testVersion").contentType("application/json;charset=UTF-8")
 				.content((example)));
 
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
