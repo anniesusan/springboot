@@ -28,10 +28,19 @@ A screenhot of my application.properties is shown below.
 * SwaggerUI - for api documentation
 * Mockito, JUnit - for unit testing
 * SLF4J - for logging
+* Spring Exception handly capabiliesis used in BaseController.java to catch the exception and throw error messages in a generic format.
+  
+  Example:
+  {
+  "errorCode": 500,
+  "errorMessage": "ERROR_CREATING_CONFIG"
+  }
 
 Once you start the spring boot application in your local machine , the swagger UI  can be accessed at the below url:
 
 http://localhost:9098/swagger-ui.html#/code45test45controller
+
+![swaggerui](https://user-images.githubusercontent.com/34004394/35787171-402c3214-09fa-11e8-8978-5561af2c7a09.JPG)
 
 
 ## Author
