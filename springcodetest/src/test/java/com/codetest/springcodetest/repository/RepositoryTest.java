@@ -14,35 +14,49 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.codetest.springcodetest.exception.SpringCodeTestException;
 import com.codetest.springcodetest.model.Config;
+import com.codetest.springcodetest.utils.CodeTestConstants;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class RepositoryTest {
- 
-   
-    @Autowired
-    private ConfigRepository configRepository;
-    
+
+	@Autowired
+	private ConfigRepository configRepository;
+
 	private Config config;
 
 	@Before
 	public void setUp() {
-		config = new Config("33","44","4444", new Date(2018-02-02), new Date(2018-02-02));
+		config = new Config("prod", "prodg", "profs", new Date(2018 - 02 - 02), new Date(2018 - 02 - 02));
 
 	}
- 
-    @Test
-    public void saveConfigTest() { 
-    	configRepository.save(config);
-    	Config retrivedConfig = null;
+
+	@Test
+	public void saveConfigTest() {
+
+		Config c = new Config();
+
 		try {
-			retrivedConfig = configRepository.findByAppCodeAndVersion("33", "44");
+			c = configRepository.findByAppCodeAndVersion("prod", "prodg");
+		} catch (SpringCodeTestException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		if (c != null) {
+			config.setId(c.getId());
+		}
+		configRepository.save(config);
+		Config retrivedConfig = null;
+
+		try {
+			retrivedConfig = configRepository.findByAppCodeAndVersion("prod", "prodg");
 		} catch (SpringCodeTestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-         Assert.assertEquals(config.getVersion(), retrivedConfig.getVersion());
-    }
- 
+		}
+		Assert.assertEquals(retrivedConfig.getVersion(), "prodg");
+	}
+
 }
